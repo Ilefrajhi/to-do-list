@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+    <link rel="stylesheet" href="{% static 'login_styles.css' %}">
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert("{{ message }}");
+            </script>
+        {% endfor %}
+    {% endif %}
+
+    <div class="container">
+        <h1>Login Form</h1>
+        <p id="msg">Please fill out with your credentials!</p>
+        <form action="{% url 'login_user' %}" method="POST">
+            {% csrf_token %}
+            <label for="firstname">
+                <span>Firstname</span>
+                <input type="text" id="firstname" name="firstname" required placeholder="Enter your firstname">
+            </label>
+            <br>
+            <label for="password">
+                <span>Password</span>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </label>
+            <br>
+            <button type="submit" id="submitBtn">Login</button>
+        </form>
+        <div class="my_container">
+            <button onclick="togglePasswordVisibility()">Toggle Password Visibility</button>
+            <script>
+                function togglePasswordVisibility() {
+                    var x = document.getElementById("password");
+                    if (x.type === "password") {
+                        x.type = "text";
+                    } else {
+                        x.type = "password";
+                    }
+                }
+            </script>
+            <div class="password-box">
+                <p id="password-msg">Forgot your password? Click here please!</p>
+                <a href="/reset_password">Reset Password</a>
+            </div>
+            <div class="register-box">
+                <p id="register-msg">Don't have an account? Click here please!</p>
+                <a href="/register">Register</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="https://github.com/Ilefrajhi"><i class="fa fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ilef-rajhi-836669262/"><i class="fa fa-linkedin"></i></a>
+    </footer>
+</body>
+</html>

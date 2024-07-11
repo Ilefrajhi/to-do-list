@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Form</title>
+    <link rel="stylesheet" href="{% static 'register_styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Register Form</h1>
+        <p id="msg">Please fill out with your credentials!</p>
+        <form class="register-box" action="{% url 'add_user' %}" method="post">
+            {% csrf_token %}
+            <label for="firstname">
+                <span>Firstname</span>
+                <input type="text" id="firstname" name="firstname" required placeholder="Enter your firstname">
+            </label>
+            <br>
+            <label for="lastname">
+                <span>Lastname</span>
+                <input type="text" id="lastname" name="lastname" required placeholder="Enter your lastname">
+            </label>
+            <br>
+            <label for="password">
+                <span>Password</span>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </label>
+            <br>
+            <label for="email">
+                <span>Email</span>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </label>
+            <br>
+            <label for="phone">
+                <span>Phone</span>
+                <input type="text" id="phone" name="phone" required placeholder="Enter your phone number">
+            </label>
+            <br>
+            <button type="submit" id="submitBtn">Register</button>
+        </form>
+        <div class="my_container">
+            <button onclick="togglePasswordVisibility()">Toggle Password Visibility</button>
+            <a href="/login">Back to login</button>
+
+            {% if messages %}
+            {% for message in messages %}
+                <script>
+                    alert("{{ message }}");
+                </script>
+            {% endfor %}
+        {% endif %} 
+
+            <script>
+                function togglePasswordVisibility() {
+                    var x = document.getElementById("password");
+                    if (x.type === "password") {
+                        x.type = "text";
+                    } else {
+                        x.type = "password";
+                    }
+                }
+
+            </script>
+        </div>
+    </div>
+</body>
+<footer>
+    <a href="https://github.com/Ilefrajhi"><i class="fa fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/ilef-rajhi-836669262/"><i class="fa fa-linkedin"></i></a>
+</footer>
+</html>

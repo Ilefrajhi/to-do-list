@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<title>
+    login form
+</title>
+<body>
+<div class =" container"></div>
+<h1>
+    login form:
+</h1>
+<p id="msg">Please fill out with your creditentials!</p>
+<label for="login form">
+    <span>username </span>
+    <input type="text" id="username" name="username" required text="enter your username">
+    <span>password </span>
+    <input type="text" id="password" name="upassword"  text="enter your password required>text="enter your username>
+    <button type="submit" id="submitBtn" onclick="myFunction">Login</button>
+</label>
+<div class="my_container">
+    <button onclick="myFunction()">Toggle Password Visibility</button>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+    <div class="password-box">
+      <p id="password">Forget your password? click here please!</p>
+      <a href="/reset_password.html">Reset Password</a>
+    </div>
+    <div class ="register_box">
+        <p id="register">Don't have an account? click here please!</p>
+        <a href="/register.html">Register</a>
+    </div>
+</div>
+</body>
+<footer class>
+    <a href="https://github.com/Ilefrajhi"><i class="fa fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/ilef-rajhi-836669262/"><i class="fa fa-linkedin"></i></a>
+</footer>
+</html>

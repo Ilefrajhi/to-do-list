@@ -1,0 +1,58 @@
+{% load static %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ma To-Do List</h1>
+        <form action="{% url 'add_task' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="Ajouter une tâche...">
+            <button type="submit">Ajouter</button>
+        </form>
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li>
+                    {{ task.title }}
+                    {% if not task.completed %}
+                        <form action="{% url 'complete_task' task.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Marquer comme complété</button>
+                        </form>
+                    {% endif %}
+                    <form action="{% url 'delete_task' task.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr>
+        <h2>Tâches incomplètes</h2>
+        <ul>
+            {% for task in incomplete_tasks %}
+                <li>{{ task.title }}</li>
+            {% endfor %}
+        </ul>
+        <hr>
+        <h2>Tâches complétées</h2>
+        <ul>
+            {% for task in completed_tasks %}
+                <li>{{ task.title }}</li>
+            {% endfor %}
+        </ul>
+        <hr>
+        <h2>Rechercher une tâche</h2>
+        <form action="{% url 'search_tasks' %}" method="GET">
+            <input type="text" name="q" placeholder="Rechercher...">
+            <button type="submit">Chercher</button>
+        </form>
+    </div>
+</body>
+<footer>
+    <a href="https://github.com/Ilefrajhi"><i class="fa fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/ilef-rajhi-836669262/"><i class="fa fa-linkedin"></i></a>
+</footer>
