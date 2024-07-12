@@ -68,8 +68,11 @@ def main(request):
 @require_POST
 def add_task(request):
     title = request.POST['title']
-    if title:
-        Task.objects.create(title=title)
+    category = request.POST['category']
+    date = request.POST['date']
+    time = request.POST['time']
+    if title and category:
+        Task.objects.create(title=title, category=category, date=date, time=time)
     return redirect('main')
 
 def delete_task(request, task_id):
@@ -80,7 +83,9 @@ def update_task(request, task_id):
     task = Task.objects.get(id=task_id)
     if request.method == 'POST':
         title = request.POST['title']
+        category = request.POST['category']
         task.title = title
+        task.category = category
         task.save()
     return redirect('main')
 
@@ -102,3 +107,9 @@ def search_tasks(request):
     query = request.GET.get('q')
     tasks = Task.objects.filter(title__icontains=query).order_by('created_at')
     return render(request, 'search_results.html', {'tasks': tasks, 'query': query})
+
+def reset_password(request):
+    template = loader.get_template('reset_password.html')
+    return HttpResponse(template.render())
+
+    
