@@ -44,6 +44,17 @@ def add_user(request):
     phone = request.POST['phone']
 
     if firstname and lastname and email and password and phone:
+        # Check if email already exists
+        # Check if the email already exists
+        if users.objects.filter(email=email).exists():
+            # Email already registered, show error message
+            messages.error(request, 'Email already registered.')
+        else:
+            # Create a new user object and save it to the database
+            users.objects.create(firstname=firstname, lastname=lastname, email=email, password=password, phone=phone)
+            # Add success message
+            messages.success(request, 'Registration successful! You can now log in.')
+    
         users.objects.create(firstname=firstname, lastname=lastname, email=email, password=password, phone=phone)
     
         # Add success message
