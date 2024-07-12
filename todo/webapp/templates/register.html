@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Register Form</title>
-    <link rel="stylesheet" href="{% static 'register_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'register.css' %}">
 </head>
 <body>
     <div class="container">
@@ -39,7 +39,7 @@
             <button type="submit" id="submitBtn">Register</button>
         </form>
         <div class="my_container">
-            <button onclick="togglePasswordVisibility()">Toggle Password Visibility</button>
+            <button onclick="togglePasswordVisibility()">Password visible!</button>
             <a href="/login">Back to login</button>
 
             {% if messages %}
