@@ -62,10 +62,6 @@ def add_user(request):
 
     return redirect('register')  # Redirect to login after successful registration
 
-def reset_password(request):
-    template = loader.get_template('reset_password.html')
-    return HttpResponse(template.render())
-
 def logout(request):
     template = loader.get_template('logout.html')
     return HttpResponse(template.render())
