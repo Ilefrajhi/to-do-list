@@ -8,6 +8,11 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/lib/main.js'></script>
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
+<header>
+    <div class="logout-container">
+        <a href='/login' id="logout">Log Out</a>
+        </div>
+</header>
 <body>
     <div class="container">
         <br>
@@ -57,7 +62,6 @@
                 </ul>
             </div>
         </div>        
-    <hr>
     <div class="search_tasks">
         <h2>Search Tasks</h2>
         <form action="{% url 'search_tasks' %}" method="GET">
@@ -108,7 +112,6 @@
             calendar.render();
         });
     </script>
-    <a href='/login'>Log Out</a>
 </body>
 <footer>
     <a href="https://github.com/Ilefrajhi"><i class="fa fa-github"></i></a>
