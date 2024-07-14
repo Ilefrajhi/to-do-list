@@ -15,12 +15,12 @@ body {
     margin: 50px 30px; /* Adjusted to shorthand property */
     background: linear-gradient(135deg, rgba(255, 165, 0, 0.5), rgba(128, 0, 128, 0.5), rgba(0, 255, 255, 0.5));
     border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 #task {
@@ -62,6 +62,7 @@ input[type="text"]:hover {
     background-color: rgb(4, 241, 4);
     margin-left: 300px !important;
     margin-top: 50px !important;
+    cursor: pointer;
 }
 
 #task-list {
@@ -70,6 +71,11 @@ input[type="text"]:hover {
 .content {
     display: flex; /* Use flexbox for layout */
     justify-content: space-between; /* Distribute space between elements */
+    background: linear-gradient(270deg, rgba(255, 192, 203, 0.5), rgba(135, 206, 250, 0.5), rgba(144, 238, 144, 0.5));
+    animation: slideBackground 10s linear infinite; /* Sliding background animation */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .search-tasks {
@@ -85,6 +91,7 @@ input[type="text"]:hover {
     color: rgb(21, 20, 20) !important;
     background-color: rgb(40, 4, 241);
     margin-left: 300px !important;
+    cursor: pointer;
 }
 
 #q {
@@ -123,6 +130,11 @@ input[type="text"]:hover {
 .task-list {
     display: flex; /* Use flexbox for layout */
     flex-direction: column; /* Column layout for list items */
+    background: linear-gradient(270deg, rgba(255, 192, 203, 0.5), rgba(135, 206, 250, 0.5), rgba(144, 238, 144, 0.5));
+    animation: slideBackground 10s linear infinite; /* Sliding background animation */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .task-list ul {
@@ -132,4 +144,14 @@ input[type="text"]:hover {
 
 .task-list li {
     margin-bottom: 10px; /* Adjust spacing between list items */
+}
+
+/* Sliding background animation */
+@keyframes slideBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
 }
