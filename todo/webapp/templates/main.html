@@ -10,13 +10,15 @@
 </head>
 <body>
     <div class="container">
+        <div class=="content">
         <h1>Ma To-Do List</h1>
-        <form action="{% url 'add_task' %}" method="POST">
+        <form action="{% url 'add_task' %}" method="POST" id="form">
             {% csrf_token %}
-            <input type="text" name="title" placeholder="Add a task..." required>
-            <label for="category">Select Category:</label>
-            <select id="category" name="category" required>
-                <option value="work">Work</option>
+            <input type="text" id="task" name="title" placeholder="Add a task..." required><br>
+            <div class="group">
+            <label for="category" id="category">Select Category:</label>
+            <select id="category" name="category"  id="category" required>
+                <option value="work" id="option">Work</option>
                 <option value="personal">Personal</option>
                 <option value="shopping">Shopping</option>
                 <option value="family">Family</option>
@@ -24,11 +26,12 @@
                 <option value="education">Education</option>
                 <option value="entertainment">Entertainment</option>
             </select>
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-            <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required>
-            <button type="submit">Add</button>
+            <label for="date" id="category">Date:</label>
+            <input type="date" id="date-time" name="date" required>
+            <label for="time" id="category">Time:</label>
+            <input type="time" id="date-time" name="time" required><br>
+            <button type="submit" id="submit-btn">Add</button>
+            </div>
         </form>
         <ul class="task-list">
             {% for task in tasks %}
@@ -47,6 +50,14 @@
                 </li>
             {% endfor %}
         </ul>
+    </div>
+    <hr>
+    <div class="search_tasks">
+        <h2>Search Tasks</h2>
+        <form action="{% url 'search_tasks' %}" method="GET">
+            <input type="text" name="q" id="q" placeholder="Search...">
+            <button type="submit" id="search">Search</button>
+    </div>
         <hr>
         <h2>Incomplete Tasks</h2>
         <ul>
@@ -62,10 +73,6 @@
             {% endfor %}
         </ul>
         <hr>
-        <h2>Search Tasks</h2>
-        <form action="{% url 'search_tasks' %}" method="GET">
-            <input type="text" name="q" placeholder="Search...">
-            <button type="submit">Search</button>
         </form>
     </div>
 
