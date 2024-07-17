@@ -5,6 +5,10 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.urls import reverse
+
 
 
 # Create your views here.
@@ -66,12 +70,6 @@ def add_user(request):
 def logout(request):
     template = loader.get_template('logout.html')
     return HttpResponse(template.render())
-
-def main(request):
-    tasks = Task.objects.order_by('created_at')
-    incomplete_tasks = Task.objects.filter(completed=False).order_by('created_at')
-    completed_tasks = Task.objects.filter(completed=True).order_by('created_at')
-    return render(request, 'main.html', {'tasks': tasks, 'incomplete_tasks': incomplete_tasks, 'completed_tasks': completed_tasks})
 
 @require_POST
 def add_task(request):
@@ -136,3 +134,10 @@ def success(request):
 def display_images(request):
     objects = MyModel.objects.all()
     return render(request, 'display.html', {'objects': objects})
+
+@login_required
+def main(request):
+    tasks = Task.objects.order_by('created_at')
+    incomplete_tasks = Task.objects.filter(completed=False).order_by('created_at')
+    completed_tasks = Task.objects.filter(completed=True).order_by('created_at')
+    return render(request, 'main.html', {'tasks': tasks, 'incomplete_tasks': incomplete_tasks, 'completed_tasks': completed_tasks})
