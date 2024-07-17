@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
-# Make sure you import your webapp's urls correctly
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('webapp.urls')), 
-    path('register', include('webapp.urls')),
-    path('login', include('webapp.urls')),
-    path('logout', include('webapp.urls')),
-    path('reset_password', include('webapp.urls')),
+    path('', include('webapp.urls')),  # Include all webapp URLs at the root
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

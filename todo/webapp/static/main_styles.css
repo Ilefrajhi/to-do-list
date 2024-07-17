@@ -8,7 +8,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 header {
@@ -17,6 +18,16 @@ header {
     justify-content: flex-end;
     padding: 10px;
     background: rgba(0, 0, 0, 0.7);
+}
+
+.logout-container {
+    margin-right: 20px;
+}
+
+.logout-container a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
 }
 
 .container {
@@ -43,6 +54,16 @@ h1, h2 {
     font-size: 16px;
 }
 
+#submit-btn {
+    background-color: #00b894;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#submit-btn:hover {
+    background-color: #019a76;
+}
 
 .task-list ul, .incomplete_tasks ul, .completed_tasks ul {
     list-style: none;
@@ -76,16 +97,38 @@ h1, h2 {
 #search:hover {
     background-color: #065a9a;
 }
-    
+
+.task-status {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.task-status .incomplete_tasks,
+.task-status .completed_tasks {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.task-status h2 {
+    text-align: center;
+}
+
 #calendar {
     margin-top: 20px;
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
 }
 
 footer a {
@@ -93,60 +136,4 @@ footer a {
     text-decoration: none;
     margin: 0 10px;
     font-size: 20px;
-}
-
-#submitBtn {
-    background-color: #00b894;
-    color: #fff;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
-}
-
-#submitBtn:hover {
-    background-color: #019a76;
-    transform: translateY(-2px);
-}
-
-#submitBtn:active {
-    background-color: #017a5a;
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-#submitBtn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.5);
-}
-
-  /* Container for the password input and toggle button */
-  .password-container {
-    position: relative;
-}
-
-/* Style for the password input */
-#password {
-    padding-right: 40px; /* Space for the toggle button */
-}
-
-/* Style for the toggle button */
-#togglePasswordVisibility {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px; /* Adjust the position as needed */
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-/* Icon style for the toggle button */
-#togglePasswordVisibility i {
-    cursor: pointer;
-    font-size: 18px; /* Adjust icon size */
 }

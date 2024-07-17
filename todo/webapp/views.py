@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Task, users
+from .models import Task, users, MyModel
+from .forms import MyModelForm
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
+
 
 # Create your views here.
 def login(request):
@@ -45,7 +47,6 @@ def add_user(request):
 
     if firstname and lastname and email and password and phone:
         # Check if email already exists
-        # Check if the email already exists
         if users.objects.filter(email=email).exists():
             # Email already registered, show error message
             messages.error(request, 'Email already registered.')
@@ -116,7 +117,22 @@ def search_tasks(request):
     return render(request, 'search_results.html', {'tasks': tasks, 'query': query})
 
 def reset_password(request):
-    template = loader.get_template('reset_password.html')
-    return HttpResponse(template.render())
+    # Add your reset password view logic here
+    return render(request, 'reset_password.html')
 
-    
+def upload_image(request):
+    if request.method == 'POST':
+        form = MyModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = MyModelForm()
+    return render(request, 'upload.html', {'form': form})
+
+def success(request):
+    return HttpResponse('Successfully uploaded')
+
+def display_images(request):
+    objects = MyModel.objects.all()
+    return render(request, 'display.html', {'objects': objects})

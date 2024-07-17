@@ -4,6 +4,7 @@
 <head>
     <title>Login Form</title>
     <link rel="stylesheet" href="{% static 'login_styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     {% if messages %}
@@ -24,25 +25,18 @@
                 <input type="text" id="firstname" name="firstname" required placeholder="Enter your firstname">
             </label>
             <br>
-            <label for="password">
+            <label class="password-container" for="password">
                 <span>Password</span>
                 <input type="password" id="password" name="password" required placeholder="Enter your password">
+                <!-- Password visibility toggle button -->
+                <button type="button" id="togglePasswordVisibility">
+                    <i id="visibilityIcon" class="far fa-eye"></i>
+                </button>
             </label>
             <br>
             <button type="submit" id="submitBtn">Login</button>
         </form>
         <div class="my_container">
-            <button onclick="togglePasswordVisibility()">Password Visibile!</button>
-            <script>
-                function togglePasswordVisibility() {
-                    var x = document.getElementById("password");
-                    if (x.type === "password") {
-                        x.type = "text";
-                    } else {
-                        x.type = "password";
-                    }
-                }
-            </script>
             <div class="password-box">
                 <p id="password-msg">Forgot your password? Click here please!</p>
                 <a href="/pwd">Reset Password</a>
@@ -57,5 +51,24 @@
         <a href="https://github.com/Ilefrajhi"><i class="fa fa-github"></i></a>
         <a href="https://www.linkedin.com/in/ilef-rajhi-836669262/"><i class="fa fa-linkedin"></i></a>
     </footer>
+
+    <!-- JavaScript for password visibility toggle using jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#togglePasswordVisibility").click(function() {
+                const passwordInput = $("#password");
+                const icon = $("#visibilityIcon");
+
+                if (passwordInput.attr("type") === "password") {
+                    passwordInput.attr("type", "text");
+                    icon.removeClass("far fa-eye").addClass("far fa-eye-slash");
+                } else {
+                    passwordInput.attr("type", "password");
+                    icon.removeClass("far fa-eye-slash").addClass("far fa-eye");
+                }
+            });
+        });
+    </script>
 </body>
 </html>

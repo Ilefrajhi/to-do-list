@@ -15,4 +15,7 @@ urlpatterns = [
     path('complete_task/<int:task_id>/', views.complete_task, name='complete_task'),  # Include <int:task_id> here
     path('search/', views.search_tasks, name='search_tasks'),
     path('login_user/', views.login_user, name='login_user'),
+    path('upload/', views.upload_image, name='upload_image'),
+    path('success/', views.success, name='success'),
+    path('images/', views.display_images, name='display_images'),
 ]

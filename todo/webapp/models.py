@@ -2,6 +2,10 @@ from django.utils import timezone
 from django.db import models
 
 # Create your models here.
+
+class MyModel(models.Model):
+    image = models.ImageField(upload_to='images/') 
+
 class users(models.Model):
     firstname = models.CharField(max_length=20)
     lastname = models.CharField(max_length=20)
