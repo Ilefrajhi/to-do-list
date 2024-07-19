@@ -3,80 +3,64 @@ from .models import Task, users, MyModel
 from .forms import MyModelForm
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
-from django.template import loader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.urls import reverse
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
-
-
-# Create your views here.
-def login(request):
-    return render (request, 'login.html')
-
+def show_login_page(request):
+    return render(request, 'login.html')
 
 @require_POST
 def login_user(request):
-    try:
-        firstname = request.POST['firstname']
-        password = request.POST['password']
-    except KeyError:
-        # Handle missing keys gracefully, like redirecting to login page with an error message
-        messages.error(request, 'Invalid form submission.')
+    print("POST request received")  # For debugging
+    firstname = request.POST.get('firstname')
+    password = request.POST.get('password')
+
+    if not firstname or not password:
+        messages.error(request, 'Please fill out both fields.')
         return redirect('login')
 
-    user = users.objects.filter(firstname=firstname, password=password).first()
-    if user:
-        # Log user in and redirect to main page
-        request.session['user_id'] = user.id
-        return redirect('main')
+    user = authenticate(request, username=firstname, password=password)
+    if user is not None:
+       auth_login(request, user)  # Use the aliased login function
+       return redirect('main')
     else:
-        # Add error message
-        messages.error(request, 'Invalid firstname or password.')
-        return redirect('login')  # Redirect back to login page
-
-
+        messages.error(request, 'Invalid username or password.')
+        return redirect('login')
 
 def register(request):
     return render(request, 'register.html')
 
 @require_POST
 def add_user(request):
-    firstname = request.POST['firstname']
-    lastname = request.POST['lastname']
-    email = request.POST['email']
-    password = request.POST['password']
-    phone = request.POST['phone']
+    firstname = request.POST.get('firstname')
+    lastname = request.POST.get('lastname')
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    phone = request.POST.get('phone')
 
     if firstname and lastname and email and password and phone:
-        # Check if email already exists
         if users.objects.filter(email=email).exists():
-            # Email already registered, show error message
             messages.error(request, 'Email already registered.')
         else:
-            # Create a new user object and save it to the database
             users.objects.create(firstname=firstname, lastname=lastname, email=email, password=password, phone=phone)
-            # Add success message
             messages.success(request, 'Registration successful! You can now log in.')
-    
-        users.objects.create(firstname=firstname, lastname=lastname, email=email, password=password, phone=phone)
-    
-        # Add success message
-        messages.success(request, 'Registration successful! You can now log in.')
 
-    return redirect('register')  # Redirect to login after successful registration
+    return redirect('register')
 
+@login_required
 def logout(request):
-    template = loader.get_template('logout.html')
-    return HttpResponse(template.render())
+    auth_logout(request)
+    return redirect('login')
 
 @require_POST
 def add_task(request):
-    title = request.POST['title']
-    category = request.POST['category']
-    date = request.POST['date']
-    time = request.POST['time']
+    title = request.POST.get('title')
+    category = request.POST.get('category')
+    date = request.POST.get('date')
+    time = request.POST.get('time')
     if title and category:
         Task.objects.create(title=title, category=category, date=date, time=time)
     return redirect('main')
@@ -88,8 +72,8 @@ def delete_task(request, task_id):
 def update_task(request, task_id):
     task = Task.objects.get(id=task_id)
     if request.method == 'POST':
-        title = request.POST['title']
-        category = request.POST['category']
+        title = request.POST.get('title')
+        category = request.POST.get('category')
         task.title = title
         task.category = category
         task.save()
@@ -106,7 +90,7 @@ def incomplete_tasks(request):
     return render(request, 'incomplete_tasks.html', {'tasks': tasks})
 
 def completed_tasks(request):
-    tasks = Task.objects.filter(completed=True). order_by('created_at')
+    tasks = Task.objects.filter(completed=True).order_by('created_at')
     return render(request, 'completed_tasks.html', {'tasks': tasks})
 
 def search_tasks(request):
@@ -115,7 +99,6 @@ def search_tasks(request):
     return render(request, 'search_results.html', {'tasks': tasks, 'query': query})
 
 def reset_password(request):
-    # Add your reset password view logic here
     return render(request, 'reset_password.html')
 
 def upload_image(request):
@@ -141,3 +124,8 @@ def main(request):
     incomplete_tasks = Task.objects.filter(completed=False).order_by('created_at')
     completed_tasks = Task.objects.filter(completed=True).order_by('created_at')
     return render(request, 'main.html', {'tasks': tasks, 'incomplete_tasks': incomplete_tasks, 'completed_tasks': completed_tasks})
+
+def test_login_user(request):
+    if request.method == 'POST':
+        return HttpResponse('POST request received')
+    return HttpResponse('GET request received')

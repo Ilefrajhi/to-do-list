@@ -13,8 +13,7 @@ SECRET_KEY = 'django-insecure-c1f7*^mw3fr+mn#@u9=ueqy7+oa8c%+2omy#$7v_7pt4fn!&lj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -104,8 +103,11 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'webapp', 'static'),
-    '/home/dell/Desktop/todolist/todo/webapp/static/images'  # Additional static files directory
 ]
+
+# Directory where static files will be collected
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Media files (User uploaded files)
 MEDIA_URL = '/media/'
@@ -118,4 +120,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # settings.py
-LOGIN_URL = '/login_user/'  # Adjust the URL to match your login view
+LOGIN_URL = '/login/'  # Redirects to the login page if user is not authenticated
+LOGIN_REDIRECT_URL = '/main/'  # Redirects to the main page after login

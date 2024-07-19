@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Login Form</title>
-    <link rel="stylesheet" href="{% static 'login_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'log.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -15,25 +15,26 @@
         {% endfor %}
     {% endif %}
 
-    <div class="container">
+    <div class="container"> 
         <h1>Login Form</h1>
         <p id="msg">Please fill out with your credentials!</p>
         <form action="{% url 'login_user' %}" method="POST">
             {% csrf_token %}
-            <label for="firstname">
-                <span>Firstname</span>
-                <input type="text" id="firstname" name="firstname" required placeholder="Enter your firstname">
-            </label>
-            <br>
-            <label class="password-container" for="password">
-                <span>Password</span>
-                <input type="password" id="password" name="password" required placeholder="Enter your password">
-                <!-- Password visibility toggle button -->
-                <button type="button" id="togglePasswordVisibility">
-                    <i id="visibilityIcon" class="far fa-eye"></i>
-                </button>
-            </label>
-            <br>
+            <div class="form-group">
+                <label for="firstname">
+                    <span>Firstname</span>
+                    <input type="text" id="firstname" name="firstname" required placeholder="Enter your firstname">
+                </label>
+            </div>
+            <div class="form-group password-container">
+                <label for="password">
+                    <span>Password</span>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    <button type="button" id="pwd-visibility">
+                        <i id="visibilityIcon" class="far fa-eye"></i>
+                    </button>
+                </label>
+            </div>
             <button type="submit" id="submitBtn">Login</button>
         </form>
         <div class="my_container">
@@ -56,7 +57,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $("#togglePasswordVisibility").click(function() {
+            $("#pwd-visibility").click(function() {
                 const passwordInput = $("#password");
                 const icon = $("#visibilityIcon");
 
