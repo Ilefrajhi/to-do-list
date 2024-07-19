@@ -8,7 +8,7 @@ Task completion status
 
 #the login page : 
 
-![alt text](image.png)
+![alt text](<Screenshot from 2024-07-19 01-02-06.png>)
 
 "the registration page :
-![alt text](image-1.png)
+![alt text](<Screenshot from 2024-07-19 01-02-39.png>)
