@@ -65,9 +65,9 @@
         </div>        
     <div class="search_tasks">
         <h2>Search Tasks</h2>
-        <form action="{% url 'search_tasks' %}" method="GET">
+        <form action="{% url 'search_tasks' %}" method="GET" class="search">
             <input type="text" name="q" id="q" placeholder="Search...">
-            <button type="submit" id="search">Search</button>
+            <button type="submit" id="search-btn">Search</button>
     </div>
     <div class="task-status">
         <div class="incomplete_tasks">

@@ -96,7 +96,7 @@ def completed_tasks(request):
 def search_tasks(request):
     query = request.GET.get('q')
     tasks = Task.objects.filter(title__icontains=query).order_by('created_at')
-    return render(request, 'search_results.html', {'tasks': tasks, 'query': query})
+    return render(request, 'main.html', {'tasks': tasks, 'query': query})
 
 def reset_password(request):
     return render(request, 'reset_password.html')
