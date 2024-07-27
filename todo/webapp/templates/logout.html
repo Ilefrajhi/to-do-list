@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <title>
+      logout
+    </title>
+    <link rel="stylesheet" href="{% static 'logout_styles.css' %}">
+</head>
+<body>
+    <h1>Logout Successful</h1>
+    <p>You have been logged out successfully.</p>
+    <a href="{% url 'login' %}" id="logout">Login Again</a>
+    <script>
+      setTimeout(function() {
+        window.location.href = "{% url 'login' %}";
+      }, 10000);
+    </script>
+</body>
+</html>

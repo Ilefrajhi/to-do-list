@@ -4,10 +4,10 @@ from .forms import MyModelForm
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.urls import reverse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login 
 
 def show_login_page(request):
     return render(request, 'login.html')
@@ -50,10 +50,10 @@ def add_user(request):
 
     return redirect('register')
 
-@login_required
+@login_required(login_url='login')
 def logout(request):
     auth_logout(request)
-    return redirect('login')
+    return render(request, 'logout.html')
 
 @require_POST
 def add_task(request):
@@ -118,7 +118,7 @@ def display_images(request):
     objects = MyModel.objects.all()
     return render(request, 'display.html', {'objects': objects})
 
-@login_required
+@login_required(login_url='login')
 def main(request):
     tasks = Task.objects.order_by('created_at')
     incomplete_tasks = Task.objects.filter(completed=False).order_by('created_at')
