@@ -30,11 +30,9 @@
                 <label for="password">
                     <span>Password</span>
                     <input type="password" id="password" name="password" required placeholder="Enter your password">
-                    <button type="button" id="pwd-visibility">
-                        <i id="visibilityIcon" class="far fa-eye"></i>
-                    </button>
+                    
+                    <input type="checkbox" onclick="togglePasswordVisibility()">Show Password
                 </label>
-            </div>
             <button type="submit" id="submitBtn">Login</button>
         </form>
         <div class="my_container">
@@ -53,23 +51,16 @@
         <a href="https://www.linkedin.com/in/ilef-rajhi-836669262/"><i class="fa fa-linkedin"></i></a>
     </footer>
 
-    <!-- JavaScript for password visibility toggle using jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $("#pwd-visibility").click(function() {
-                const passwordInput = $("#password");
-                const icon = $("#visibilityIcon");
+        function togglePasswordVisibility() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
 
-                if (passwordInput.attr("type") === "password") {
-                    passwordInput.attr("type", "text");
-                    icon.removeClass("far fa-eye").addClass("far fa-eye-slash");
-                } else {
-                    passwordInput.attr("type", "password");
-                    icon.removeClass("far fa-eye-slash").addClass("far fa-eye");
-                }
-            });
-        });
     </script>
 </body>
 </html>

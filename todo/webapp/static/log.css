@@ -122,16 +122,9 @@ input[type="number"]:focus {
 }
 
 #pwd-visibility {
-    position: absolute;
-    right: 10px; /* Adjust for alignment with the password input */
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
     cursor: pointer;
-    background: none;
-    border: none;
-    color: #fff; /* Ensure the icon matches the input text color */
-}
-
-#pwd-visibility i {
-    font-size: 18px; /* Adjust icon size */
+    
 }
