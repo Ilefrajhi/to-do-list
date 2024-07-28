@@ -8,15 +8,13 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/lib/main.js'></script>
     <link rel="stylesheet" href="{% static 'main_styles.css' %}">
 </head>
-<header>
-    <div class="logout-container">
-        <a href="/logout" id="logout">Log Out</a>
-    </div>
-</header>
 <body>
+    <header>
+        <div class="logout-container">
+            <a href="/logout" id="logout">Log Out</a>
+        </div>
+    </header>
     <div class="container">
-        <br>
-        <br>
         <h1>Ma To-Do List</h1>
         <div class="task-status">
             <div class="incomplete_tasks">
@@ -35,7 +33,7 @@
                     {% endfor %}
                 </ul>
             </div>
-        </div>    
+        </div>
     </div>
     <div class="search_tasks">
         <h2>Search Tasks</h2>
@@ -62,13 +60,13 @@
                 </ul>
             </div>
         </form>
-    </div>        
+    </div>
     <div class="content">
         <h2>Wanna add a task ?</h2>
         <div class="form-group">
             <form action="{% url 'add_task' %}" method="POST">
                 {% csrf_token %}
-                <input type="text" id="task" name="title" class="wide-input" placeholder="Add a task..." required><br>
+                <input type="text" id="task" name="title" placeholder="Add a task..." required>
                 <div class="group">
                     <label for="category">Select Category:</label>
                     <select id="category" name="category" required>
@@ -81,42 +79,26 @@
                         <option value="entertainment">Entertainment</option>
                     </select>
                     <label for="date">Date:</label>
-                    <input type="date" id="date-time" name="date" required>
+                    <input type="date" id="date" name="date" required>
                     <label for="time">Time:</label>
-                    <input type="time" id="date-time" name="time" required><br>
-                    <button type="submit" id="submit-btn">Add</button>
+                    <input type="time" id="time" name="time">
                 </div>
+                <button type="submit">Add</button>
             </form>
         </div>
     </div>
-
-    <div id='calendar'></div>
-
+    <div id="calendar"></div>
+    <footer>
+        <p>&copy; 2024 To-Do List Application</p>
+    </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
-
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: [
-                    {
-                        title: 'Event 1',
-                        start: '2024-07-20'
-                    },
-                    {
-                        title: 'Event 2',
-                        start: '2024-07-21',
-                        end: '2024-07-23'
-                    }
-                ]
+                initialView: 'dayGridMonth'
             });
-
             calendar.render();
         });
     </script>
 </body>
-<footer>
-    <a href="https://github.com/Ilefrajhi"><i class="fa fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/ilef-rajhi-836669262/"><i class="fa fa-linkedin"></i></a>
-</footer>
 </html>

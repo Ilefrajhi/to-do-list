@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login 
+from datetime import timedelta
 
 def show_login_page(request):
     return render(request, 'login.html')
@@ -61,8 +62,13 @@ def add_task(request):
     category = request.POST.get('category')
     date = request.POST.get('date')
     time = request.POST.get('time')
+
+    # Calculate reminder time (2 hours before the task time)
+    task_time = time.combine(date, time)
+    reminder_time = task_time - timedelta(hours=2)
+    
     if title and category:
-        Task.objects.create(title=title, category=category, date=date, time=time)
+        Task.objects.create(title=title, category=category, date=date, time=time, reminder_time=reminder_time)
     return redirect('main')
 
 def delete_task(request, task_id):

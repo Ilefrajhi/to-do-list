@@ -29,6 +29,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     date = models.DateField(default=timezone.now)
     time = models.TimeField(default=timezone.now)
+    reminder_time = models.DateTimeField(null=True, blank=True)  # New field for reminder time
 
 
     def __str__(self):

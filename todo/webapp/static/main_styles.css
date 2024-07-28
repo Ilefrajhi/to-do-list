@@ -76,7 +76,6 @@ header .logout-container a {
 
 .main-content {
     width: 100%;
-    max-width: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,17 +95,6 @@ header .logout-container a {
 .section h2 {
     text-align: center;
     color: #ff00ff; /* Neon magenta */
-}
-
-.form-group input, .form-group select, .form-group button {
-    display: block;
-    width: calc(100% - 20px);
-    margin: 10px auto;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
-    color: #000;
 }
 
 #submit-btn {
@@ -144,6 +132,7 @@ header .logout-container a {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .task-status .incomplete_tasks,
@@ -190,4 +179,77 @@ footer a {
         width: 100%;
         margin-bottom: 10px;
     }
+}
+
+.search_tasks {
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.content {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.content h2 {
+    font-size: 24px;
+    color: #ff00ff; /* Neon magenta */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-group input, .form-group select, .form-group button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group button:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+/* Increased width for input elements */
+.form-group input#task {
+    width: 100%; /* Adjust width as needed */
+}
+
+.form-group select#category, .form-group input#date-time {
+    width: 100%; /* Adjust width as needed */
 }
