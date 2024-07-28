@@ -11,38 +11,37 @@
 <header>
     <div class="logout-container">
         <a href="/logout" id="logout">Log Out</a>
-       
-        </div>
+    </div>
 </header>
 <body>
     <div class="container">
         <br>
         <br>
         <h1>Ma To-Do List</h1>
-        <div class="content">
-            <div class="form-group">
-                <form action="{% url 'add_task' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="text" id="task" name="title" placeholder="Add a task..." required><br>
-                    <div class="group">
-                        <label for="category">Select Category:</label>
-                        <select id="category" name="category" required>
-                            <option value="work">Work</option>
-                            <option value="personal">Personal</option>
-                            <option value="shopping">Shopping</option>
-                            <option value="family">Family</option>
-                            <option value="hobbies">Hobbies</option>
-                            <option value="education">Education</option>
-                            <option value="entertainment">Entertainment</option>
-                        </select>
-                        <label for="date">Date:</label>
-                        <input type="date" id="date-time" name="date" required>
-                        <label for="time">Time:</label>
-                        <input type="time" id="date-time" name="time" required><br>
-                        <button type="submit" id="submit-btn">Add</button>
-                    </div>
-                </form>
+        <div class="task-status">
+            <div class="incomplete_tasks">
+                <h2>Incomplete Tasks</h2>
+                <ul>
+                    {% for task in incomplete_tasks %}
+                        <li>{{ task.title }} - {{ task.category }} - {{ task.date }} {{ task.time }}</li>
+                    {% endfor %}
+                </ul>
             </div>
+            <div class="completed_tasks">
+                <h2>Completed Tasks</h2>
+                <ul>
+                    {% for task in completed_tasks %}
+                        <li>{{ task.title }} - {{ task.category }} - {{ task.date }} {{ task.time }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>    
+    </div>
+    <div class="search_tasks">
+        <h2>Search Tasks</h2>
+        <form action="{% url 'search_tasks' %}" method="GET" class="search">
+            <input type="text" name="q" id="q" placeholder="Search...">
+            <button type="submit" id="search-btn">Search</button>
             <div class="task-list">
                 <ul id="task-list">
                     {% for task in tasks %}
@@ -62,32 +61,34 @@
                     {% endfor %}
                 </ul>
             </div>
-        </div>        
-    <div class="search_tasks">
-        <h2>Search Tasks</h2>
-        <form action="{% url 'search_tasks' %}" method="GET" class="search">
-            <input type="text" name="q" id="q" placeholder="Search...">
-            <button type="submit" id="search-btn">Search</button>
+        </form>
+    </div>        
+    <div class="content">
+        <h2>Wanna add a task ?</h2>
+        <div class="form-group">
+            <form action="{% url 'add_task' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" id="task" name="title" class="wide-input" placeholder="Add a task..." required><br>
+                <div class="group">
+                    <label for="category">Select Category:</label>
+                    <select id="category" name="category" required>
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="family">Family</option>
+                        <option value="hobbies">Hobbies</option>
+                        <option value="education">Education</option>
+                        <option value="entertainment">Entertainment</option>
+                    </select>
+                    <label for="date">Date:</label>
+                    <input type="date" id="date-time" name="date" required>
+                    <label for="time">Time:</label>
+                    <input type="time" id="date-time" name="time" required><br>
+                    <button type="submit" id="submit-btn">Add</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="task-status">
-        <div class="incomplete_tasks">
-            <h2>Incomplete Tasks</h2>
-            <ul>
-                {% for task in incomplete_tasks %}
-                    <li>{{ task.title }} - {{ task.category }} - {{ task.date }} {{ task.time }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="completed_tasks">
-            <h2>Completed Tasks</h2>
-            <ul>
-                {% for task in completed_tasks %}
-                    <li>{{ task.title }} - {{ task.category }} - {{ task.date }} {{ task.time }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>    
-</div>
 
     <div id='calendar'></div>
 
